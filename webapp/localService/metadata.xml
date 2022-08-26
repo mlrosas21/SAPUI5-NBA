@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZOS_ACADEMIA_NBA_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Equipo" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NombreEquipo"/>
+                </Key>
+                <Property Name="NombreEquipo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Nombre de equipo NBA" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ciudad" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Ciudad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Estado" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Entrenador" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Entrenador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="To_Jugadores" Relationship="ZOS_ACADEMIA_NBA_SRV.EQUIPO_JUGADOR" FromRole="FromRole_EQUIPO_JUGADOR" ToRole="ToRole_EQUIPO_JUGADOR"/>
+            </EntityType>
+            <EntityType Name="Jugador" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Equipo"/>
+                    <PropertyRef Name="Dorsal"/>
+                </Key>
+                <Property Name="Equipo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Nombre de equipo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dorsal" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Dorsal jugador" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posicion" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Posicion" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nombre" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Nombre" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Apellido" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Apellido" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Altura" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Altura en cm" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Peso" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Peso en kg" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FechaDeNacimiento" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Fecha de nacimiento" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Puntos" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Puntos en temporada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Asistencias" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Asistencias en temporada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Rebotes" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Rebotes en temporada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartidosJugados" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Partidos jugados en temporada" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="EQUIPO_JUGADOR" sap:content-version="1">
+                <End Type="ZOS_ACADEMIA_NBA_SRV.Equipo" Multiplicity="1" Role="FromRole_EQUIPO_JUGADOR"/>
+                <End Type="ZOS_ACADEMIA_NBA_SRV.Jugador" Multiplicity="*" Role="ToRole_EQUIPO_JUGADOR"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_EQUIPO_JUGADOR">
+                        <PropertyRef Name="NombreEquipo"/>
+                    </Principal>
+                    <Dependent Role="ToRole_EQUIPO_JUGADOR">
+                        <PropertyRef Name="Equipo"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZOS_ACADEMIA_NBA_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="EquipoSet" EntityType="ZOS_ACADEMIA_NBA_SRV.Equipo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="JugadorSet" EntityType="ZOS_ACADEMIA_NBA_SRV.Jugador" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="EQUIPO_JUGADORSet" Association="ZOS_ACADEMIA_NBA_SRV.EQUIPO_JUGADOR" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EquipoSet" Role="FromRole_EQUIPO_JUGADOR"/>
+                    <End EntitySet="JugadorSet" Role="ToRole_EQUIPO_JUGADOR"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZOS_ACADEMIA_NBA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZOS_ACADEMIA_NBA_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

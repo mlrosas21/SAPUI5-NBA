@@ -1,0 +1,116 @@
+<mvc:View
+	controllerName="academia2022.znba.controller.ListaJugadores"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:vm="sap.ui.comp.variants">
+
+        <f:DynamicPage id="dynamicPageListaJugadores" headerExpanded="{/headerExpanded}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+                    <f:heading>
+						<Title text="Lista de todos los jugadores registrados"/>
+					</f:heading>
+					<f:actions>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://excel-attachment" press="onExport"/>
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<f:content>
+						<fb:FilterBar id="filterbar" reset="onReset" search="onFilterSearch" useToolbar="false" showGoOnFB="false" showFilterConfiguration="false">
+							<fb:filterGroupItems>
+								<fb:FilterGroupItem groupName="__$INTERNAL$" name="A" label="Nombre de Equipo" partOfCurrentVariant="true" visibleInFilterBar="true">
+									<fb:control>
+										<Input id="inputEquipo" showValueHelp="true" valueHelpRequest="onOpenTeamValueHelp" valueHelpOnly="true" liveChange="onFilterChange"/>
+									</fb:control>				
+								</fb:FilterGroupItem>	
+                                <fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="Posición" partOfCurrentVariant="true" visibleInFilterBar="true">
+									<fb:control>
+										<MultiComboBox items="{/PosicionBaskSet}" placeholder="Posición" showSecondaryValues="true" id="idMultiPosiciones" selectionChange="onFilterChange">
+                                            <core:ListItem key="{CodPosicion}" text="{DescPosicion}" additionalText="{CodPosicion}"/>
+                                        </MultiComboBox>
+									</fb:control>				
+								</fb:FilterGroupItem>											
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+					</f:content>
+				</f:DynamicPageHeader>
+			</f:header>
+            
+
+			<!-- Lista Jugadores -->
+			<f:content>
+                <Table id="idTablaListaJugadores"
+                    inset="false"
+                    alternateRowColors="true"
+                    items="{/JugadorSet}">
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="Jugadores" level="H2"/>
+                            <ToolbarSpacer/>
+                            <Button
+                            tooltip="Ordenar por"
+                            icon="sap-icon://sort"
+                            press="handleSortButtonPressed"/>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column hAlign="Center" sortIndicator="None">
+                            <Text text="{i18n>Equipo}" />
+                        </Column>
+                        <Column width="8rem">
+                            <Text text="{i18n>Nombre}" />
+                        </Column>
+                        <Column hAlign="Center" sortIndicator="None" >
+                            <Text text="{i18n>Dorsal}" />
+                        </Column>
+                        <Column hAlign="Center">
+                            <Text text="{i18n>Posicion}" />
+                        </Column>
+                        <Column hAlign="Center">
+                            <Text text="{i18n>PJ}" />
+                        </Column>
+                        <Column hAlign="Center">
+                            <Text text="{i18n>PPG}" />
+                        </Column>
+                        <Column hAlign="Center">
+                            <Text text="{i18n>DPG}" />
+                        </Column>
+                        <Column hAlign="Center">
+                            <Text text="{i18n>3PG}" />
+                        </Column>
+                        <Column hAlign="Center">
+                            <Text text="{i18n>APG}" />
+                        </Column>
+                        <Column hAlign="Center">
+                            <Text text="{i18n>RPG}" />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem  type="Navigation" press="onPlayerPress">
+                            <cells>
+                                <ObjectIdentifier title="{NombreEquipo}" />
+                                <Text text="{Apellido}, {Nombre}" />
+                                <ObjectIdentifier title="{Dorsal}" />
+                                <Text text="{PosicionDesc}" />
+                                <Text text="{PartidosJugados}" />
+                                <Text text="{PPG}" />
+                                <Text text="{DPG}" />
+                                <Text text="{TPG}" />
+                                <Text text="{APG}" />
+                                <Text text="{RPG}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+			</f:content>
+		</f:DynamicPage>
+</mvc:View>

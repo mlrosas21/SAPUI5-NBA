@@ -1,0 +1,60 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<FlexBox class="sapUiSmallMargin" alignItems="Start">
+		<f:Form id="FormDisplayColumn_oneGroup" class="form" 
+			editable="false">
+			<f:layout>
+				<f:ColumnLayout />
+			</f:layout>
+			<f:formContainers >
+				<f:FormContainer >
+					<f:formElements >
+						<f:FormElement label="Partidos Jugados" >
+							<f:fields>
+								<Text text="{PartidosJugados}" textAlign="End" class="pageStats"/>
+							</f:fields>
+						</f:FormElement>
+                            <f:FormElement label="Minutos">
+							<f:fields>
+								<Text text="{Minutos}" textAlign="End" class="pageStats"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Asistencias">
+							<f:fields>
+								<Text text="{Asistencias}" textAlign="End" class="pageStats"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Rebotes">
+							<f:fields>
+								<Text text="{Rebotes}" textAlign="End" class="pageStats"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Puntos totales">
+							<f:fields>
+								<Text text="{Puntos}" textAlign="End" class="pageStats"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Triples (3 pts.)">
+							<f:fields>
+								<Text text="{Triples}" textAlign="End" class="pageStats"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Dobles (2 pts.)">
+							<f:fields>
+								<Text text="{Dobles}" textAlign="End" class="pageStats"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Tiros Libres (1 pt.)">
+							<f:fields>
+								<Text text="{TirosLibres}" textAlign="End" class="pageStats"/>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+	</FlexBox>
+</core:FragmentDefinition>

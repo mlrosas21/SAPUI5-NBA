@@ -1,0 +1,186 @@
+{
+    "_version": "1.28.0",
+    "sap.app": {
+        "id": "academia2022.znba",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap-ux/fiori-freestyle-writer:basic",
+            "version": "0.11.15",
+            "toolsId": "55e48174-15e8-456b-9fde-2040185e694d"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZOS_ACADEMIA_NBA_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "academia2022-znba-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "RosterNBA",
+                    "action": "Display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "dependencies": {
+            "minUI5Version": "1.84.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "academia2022.znba.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "headers": {
+                        "X-Requested-With": "X"
+                    }
+                }
+            },
+            "paises": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "model/paises.json"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "academia2022.znba.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteEquipos",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetEquipos"
+                    ]
+                },
+                {
+                    "name": "RouteEquipoDetalle",
+                    "pattern": "/Equipo/{NombreEquipo}",
+                    "target": [
+                        "TargetDetalleEquipo"
+                    ]
+                },
+                {
+                    "name": "RouteJugador",
+                    "pattern": "/Equipo/{NombreEquipo}/{Dorsal}",
+                    "target": [
+                        "TargetJugador"
+                    ]
+                },{
+                    "name": "RouteListaJugadores",
+                    "pattern": "/ListaJugadores",
+                    "target": [
+                        "TargetListaJugadores"
+                    ]
+                }    
+            ],
+            "targets": {
+                "TargetEquipos": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "viewName": "Equipos"
+                },
+                "TargetDetalleEquipo": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "viewName": "EquipoDetalle"
+                },
+                "TargetJugador": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "viewName": "Jugador"
+                },
+                "TargetListaJugadores": {
+                    "viewType": "XML",
+                    "transition": "flip",
+                    "viewName": "ListaJugadores"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "academia2022.znba.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "academia2022-znba"
+    },
+    "sap.cloud.portal": {
+        "RosterNBA-Display": {
+            "vizType": "academia2022.znbatile"
+        }
+    }
+}

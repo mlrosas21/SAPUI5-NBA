@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		noDataText="No se encontraron equipos"
+		title="Equipos"
+		confirm="onCloseValueHelp"
+		cancel="onCloseValueHelp"
+		showClearButton="true"
+		items="{/EquipoSet}"
+        rememberSelections="true"
+        multiSelect="true">
+		<StandardListItem
+			title="{NombreEquipo}"
+			icon="{Logo}"
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active"/>
+	</SelectDialog>
+</core:FragmentDefinition>

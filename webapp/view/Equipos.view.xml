@@ -1,0 +1,46 @@
+<mvc:View controllerName="academia2022.znba.controller.Equipos"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+    xmlns:core="sap.ui.core">
+
+	<f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="{i18n>TemporadaActual}"/>
+					</f:heading>
+					<f:actions>
+                        <Button icon="sap-icon://list" text="{i18n>ListaJugadores}" press="onPlayersListPress" />
+                        <Button icon="sap-icon://sys-add" type="Emphasized" text="{i18n>AgregarEquipo}" press="onOpenAddTeam" />
+					</f:actions>
+				</f:DynamicPageTitle>
+			</f:title>
+
+        <f:content>
+        	<Panel headerText="{i18n>tituloEquipos}" height="100%">
+				<layoutData>
+					<FlexItemData baseSize="50%" />
+				</layoutData>
+                <f:GridContainer id="idEquiposGrid" items="{/EquipoSet}" class="grid" snapToRow="true">
+                    <f:layout>
+                        <f:GridContainerSettings rowSize="100px" columnSize="90px" gap="12px"/>
+                    </f:layout>
+                    
+                    <f:items>
+                        <GenericTile wrappingType="Normal" header="{NombreEquipo}" press="onTeamPress" class="nbaTiles sapUiTinyMargins">
+                            <layoutData>
+                                <f:GridContainerItemLayoutData minRows="2" columns="2" />
+                            </layoutData>
+                            <TileContent>
+                                <f:Avatar src="{Logo}" displayShape="Square" imageFitType="Contain" displaySize="XL" class="nbaIcons"/>
+                            </TileContent>
+                        </GenericTile>
+                    </f:items>
+                </f:GridContainer>
+            </Panel>
+        </f:content>
+	</f:DynamicPage>
+</mvc:View>
+
+

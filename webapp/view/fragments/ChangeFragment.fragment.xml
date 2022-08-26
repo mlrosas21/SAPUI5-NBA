@@ -1,0 +1,60 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<VBox class="sapUiSmallMargin">
+		<f:Form id="FormChangeColumn_oneGroup"
+			editable="true">
+			<f:layout>
+				<f:ColumnLayout/>
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements >
+						<f:FormElement label="Partidos Jugados">
+							<f:fields>
+								<StepInput value="{PartidosJugados}" min="0" id="partidosJugadosForm" />
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Minutos">
+							<f:fields>
+								<StepInput value="{Minutos}" min="0" id="minutosForm"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Asistencias" >
+							<f:fields >
+								<StepInput value="{Asistencias}" min="0" id="asistenciasForm" />
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="Rebotes">
+							<f:fields>
+								<StepInput value="{Rebotes}" min="0" id="rebotesForm"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Puntos totales">
+							<f:fields>
+								<StepInput value="{updatingPoints>/}" min="0" editable="false" id="puntosForm"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Triples (3 pts.)">
+							<f:fields>
+								<StepInput value="{Triples}" min="0" id="triplesForm" change="onChange"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Dobles (2 pts.)">
+							<f:fields>
+								<StepInput value="{Dobles}" min="0" id="doblesForm" change="onChange"/>
+							</f:fields>
+						</f:FormElement>
+                        <f:FormElement label="Tiros Libres (1 pt.)">
+							<f:fields>
+								<StepInput value="{TirosLibres}" min="0" id="tirosLibresForm" change="onChange"/>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+	</VBox>
+</core:FragmentDefinition>

@@ -1,0 +1,223 @@
+<mvc:View controllerName="academia2022.znba.controller.Jugador"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:f="sap.f"
+    xmlns:grid="sap.ui.layout.cssgrid"
+	xmlns:form="sap.ui.layout.form"
+    xmlns:chart="sap.suite.ui.microchart"
+    xmlns:card="sap.f.cards">
+
+    <ObjectPageLayout id="idJugadorDetalle"
+                showTitleInHeaderContent="true"
+            alwaysShowContentHeader="false"
+            preserveHeaderStateOnScroll="false"
+            headerContentPinnable="true"
+            isChildPage="true"
+            upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+				<expandedHeading>
+					<m:Title text="{Apellido}, {Nombre}" wrapping="true"/>
+				</expandedHeading>
+
+				<snappedHeading>
+					<m:FlexBox fitContainer="true" alignItems="Center">
+						<f:Avatar src="sap-icon://customer"
+                                displaySize="L"
+                                displayShape="Circle"
+                                class="sapUiTinyMarginEnd" />
+                        <m:VBox class="sapUiTinyMargin">
+						    <m:Title text="{Apellido}, {Nombre}" level="H1" wrapping="true"/>
+                            <m:Label text="{PosicionDesc}"/>
+                            <m:Label text="{NombreEquipo}"/>
+                        </m:VBox>
+                        <m:VBox class="sapUiMediumMargin">
+                            <m:Title text="#{Dorsal}" />
+                        </m:VBox>
+					</m:FlexBox>
+				</snappedHeading>
+
+				<expandedContent>
+					<m:Label text="{NombreEquipo}"/>
+				</expandedContent>
+
+				<snappedTitleOnMobile>
+					<m:Title text="{Apellido}, {Nombre}"/>
+				</snappedTitleOnMobile>
+
+                <actions>
+                    <m:Button text="{i18n>Editar}" type="Default" press="onOpenEditPlayer"/>
+                    <m:Button text="{i18n>Borrar}" type="Reject"  press="deletePlayer"/>
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:FlexBox wrap="Wrap" fitContainer="true" justifyContent="SpaceBetween">
+                <f:Avatar src="sap-icon://customer"
+                                displaySize="L"
+                                displayShape="Circle"
+                />
+
+                <m:VBox justifyContent="End" >
+                    <m:Label text="Dorsal"/>
+                    <m:Title text="#{Dorsal}" class="playerStats"/>
+                </m:VBox>
+
+                <m:VBox justifyContent="End">
+                    <m:Label text="Posición principal"/>
+                    <m:Title text="{PosicionDesc}" class="playerStats"/>
+                </m:VBox>
+
+                <m:VBox justifyContent="End">
+                    <m:Label text="Nacionalidad"/>
+                    <m:Title text="{Nacionalidad}" class="playerSecondaryStats"/>
+                </m:VBox>
+
+                <m:VBox justifyContent="End">
+                    <m:Label text="Fecha de Nacimiento"/>
+                    <m:Title text="{ path: 'FechaDeNacimiento', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy', UTC: true } }" class="playerSecondaryStats"/>
+                </m:VBox>
+
+                <m:VBox justifyContent="SpaceAround" fitContainer="true">
+                    <m:HBox alignContent="Center" justifyContent="SpaceBetween">
+                        <m:Label text="Peso" class="sapUiSmallMarginEnd" vAlign="Middle"/>
+                        <m:Title text="{Peso} kg"/>
+                    </m:HBox>        
+                    <m:HBox alignContent="Center" justifyContent="SpaceBetween">
+                        <m:Label text="Altura" class="sapUiSmallMarginEnd" vAlign="Middle"/>
+                        <m:Title text="{Altura} cm"/>
+                    </m:HBox>
+                </m:VBox>
+                
+            </m:FlexBox>
+        </headerContent>
+        <sections>
+			<ObjectPageSection titleUppercase="false" title="{i18n>TotalesTemporada}" id="statsJugador">            
+                <subSections>
+                    <ObjectPageSubSection title="{i18n>EstadísticasPrincipales}">
+                        <blocks>
+                            <f:GridContainer>
+                                <f:layout>
+                                    <f:GridContainerSettings rowSize="60px" columnSize="84px" gap="12px" />
+                                </f:layout>
+                                <f:layoutXS>
+                                    <f:GridContainerSettings rowSize="70px" columnSize="70px" gap="8px" />
+                                </f:layoutXS>
+                                <m:FlexBox justifyContent="SpaceBetween" width="25rem">
+                                    <m:layoutData>
+                                        <f:GridContainerItemLayoutData rows="2" columns="6" />
+                                    </m:layoutData>
+                                    <m:VBox class="sapUiTinyMarginEnd">
+                                        <m:Title text="{i18n>Puntos}" />
+                                        <m:Text text="Total: {Puntos} pts"/>
+                                    </m:VBox>
+                                    <m:items>
+                                        <chart:InteractiveDonutChart selectionChanged="onSelectionChanged">
+                                            <chart:segments>
+                                                <chart:InteractiveDonutChartSegment label="Tiros Libres" value="{parts: [
+                                                        {path: 'TirosLibres'},
+                                                        {path: 'Puntos'}
+                                                        ],
+                                                        formatter: '.formatter.chartValueTirosLibres'}" 
+                                                        displayedValue="{parts: [
+                                                        {path: 'TirosLibres'},
+                                                        {path: 'Puntos'}
+                                                        ],
+                                                        formatter: '.formatter.porcentajeTirosLibres'
+                                                    } %"/>
+                                                <chart:InteractiveDonutChartSegment label="Dobles" value="{parts: [
+                                                        {path: 'Dobles'},
+                                                        {path: 'Puntos'}
+                                                        ],
+                                                        formatter: '.formatter.chartValueDobles'}" 
+                                                        displayedValue="{parts: [
+                                                        {path: 'Dobles'},
+                                                        {path: 'Puntos'}
+                                                        ],
+                                                        formatter: '.formatter.porcentajeDobles'
+                                                    } %"/>
+                                                <chart:InteractiveDonutChartSegment label="Triples" value="{parts: [
+                                                        {path: 'Triples'},
+                                                        {path: 'Puntos'}
+                                                        ],
+                                                        formatter: '.formatter.chartValueTriples'}" 
+                                                        displayedValue="{parts: [
+                                                        {path: 'Triples'},
+                                                        {path: 'Puntos'}
+                                                        ],
+                                                        formatter: '.formatter.porcentajeTriples'
+                                                    } %"/>
+                                            </chart:segments>
+                                        </chart:InteractiveDonutChart>
+                                    </m:items>
+                                </m:FlexBox>
+                                <f:GridList id="gridList" class="sapUiTinyMargin">
+                                    <f:layoutData>
+                                        <f:GridContainerItemLayoutData minRows="2" columns="6" />
+                                    </f:layoutData>
+                                    <f:customLayout>
+                                        <grid:GridBoxLayout boxMinWidth="10rem"/>
+                                    </f:customLayout>
+                                    <f:GridListItem>
+                                        <m:VBox class="sapUiTinyMarginEnd">
+                                            <m:Label text="{i18n>PPG}" wrapping="true" class="sapUiTinyMargin" />
+                                            <m:Text text="{PPG}" wrapping="true" class="sapUiTinyMargin pageStats" textAlign="End"/>
+                                        </m:VBox>
+                                    </f:GridListItem>
+                                    <f:GridListItem>
+                                        <m:VBox class="sapUiTinyMarginEnd">
+                                            <m:Label text="{i18n>MPG}" wrapping="true" class="sapUiTinyMargin" />
+                                            <m:Title text="{MPG}" wrapping="true" class="sapUiTinyMargin pageStats" textAlign="End"/>
+                                        </m:VBox>
+                                    </f:GridListItem>
+                                    <f:GridListItem>
+                                        <m:VBox class="sapUiTinyMarginEnd">
+                                            <m:Label text="{i18n>DPG}" wrapping="true" class="sapUiTinyMargin" />
+                                            <m:Title text="{DPG}" wrapping="true" class="sapUiTinyMargin pageStats" textAlign="End" />
+                                        </m:VBox>
+                                    </f:GridListItem>
+                                    <f:GridListItem>
+                                        <m:VBox class="sapUiTinyMarginEnd">
+                                            <m:Label text="{i18n>3PG}" wrapping="true" class="sapUiTinyMargin" />
+                                            <m:Title text="{TPG}" wrapping="true" class="sapUiTinyMargin pageStats" textAlign="End" />
+                                        </m:VBox>
+                                    </f:GridListItem>
+                                    <f:GridListItem>
+                                        <m:VBox class="sapUiTinyMarginEnd">
+                                            <m:Label text="{i18n>APG}" wrapping="true" class="sapUiTinyMargin" />
+                                            <m:Title text="{APG}" wrapping="true" class="sapUiTinyMargin pageStats"/>
+                                        </m:VBox>
+                                    </f:GridListItem>
+                                    <f:GridListItem>
+                                        <m:VBox class="sapUiTinyMarginEnd">
+                                            <m:Label text="{i18n>RPG}" wrapping="true" class="sapUiTinyMargin" />
+                                            <m:Title text="{RPG}" wrapping="true" class="sapUiTinyMargin pageStats"/>
+                                        </m:VBox>
+                                    </f:GridListItem>
+                            </f:GridList>
+                            </f:GridContainer>
+                        </blocks>     
+                        <actions>
+                            <m:Button text="{i18n>AgregarRegistroPartido}" icon="sap-icon://add-activity-2" type="Emphasized" press="onOpenaddMatchStats"/>
+                        </actions>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+            <ObjectPageSection titleUppercase="false" title="Totales">            
+                <subSections>
+                    <ObjectPageSubSection id="statsTotales" > 
+                    <blocks>
+                    </blocks>
+                    <actions>
+                        <m:Button text=" {i18n>EditarTotalesTemporada}" icon="sap-icon://edit" press="handleEditPress" id="edit"/>
+                        <m:Button id="save" text="{i18n>Guardar}" type="Emphasized" visible="false" press="handleSavePress" />
+					    <m:Button id="cancel" text="{i18n>Cancelar}" visible="false" press="handleCancelPress" />
+                    </actions>
+                    </ObjectPageSubSection>
+                </subSections>
+			</ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

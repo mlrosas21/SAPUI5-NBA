@@ -1,0 +1,94 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+    <Dialog id="dialogEquipo" contentWidth="30%" busyIndicatorDelay="0" title="Añadir jugador" icon="sap-icon://add-employee">
+        		<l:Grid defaultSpan="L12 M12 S12" width="auto" id="idGrid">
+			<l:content>
+            <f:Form id="idFormJugador" editable="true" >
+                <f:layout>
+				<f:ResponsiveGridLayout
+					labelSpanXL="4"
+					labelSpanL="3"
+					labelSpanM="4"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="0"
+					emptySpanL="4"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer >
+                        <f:formElements >
+                            <f:FormElement label="Equipo" >
+                                <f:fields >
+                                    <Text text="{NombreEquipo}"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Dorsal">
+                                <f:fields>
+                                    <StepInput value="{jugador>/Dorsal}" min="0" max="99" required="true" enabled="{= !${vista>/editarJugador}}" change="validateInputNumeros" fieldGroupIds="formInputs"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Apellido y nombre del jugador">
+                                <f:fields>
+                                    <Input type="Text" value="{jugador>/Apellido}" required="true" placeholder="Apellido" enabled="{= !${vista>/editarJugador}}" change="validateInputText" valueStateText="Por favor, ingrese sólo letras"  fieldGroupIds="formInputs" >
+                                    <layoutData>
+										<l:GridData span="XL2 L2 M2 S6" />
+									</layoutData>
+                                    </Input>
+                                    <Input value="{jugador>/Nombre}" required="true" placeholder="Nombre" enabled="{= !${vista>/editarJugador}}" change="validateInputText"  fieldGroupIds="formInputs" >
+                                    <layoutData>
+										<l:GridData span="XL2 L2 M2 S6" />
+									</layoutData>
+                                    </Input>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Fecha de nacimiento">
+                                <f:fields>
+                                    <DatePicker dateValue="{path: 'jugador>/FechaDeNacimiento', formatOptions: {UTC: true}}" placeholder="Ingrese fecha de nacimiento" required="true" id="DatePickerForm" enabled="{= !${vista>/editarJugador}}" change="handleDateChange"  fieldGroupIds="formInputs" />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Posición" >
+                                <f:fields>
+                                    <ComboBox showSecondaryValues= "true" selectedKey="{jugador>/Posicion}" required="true" items="{/PosicionBaskSet}" selectedItem="" change="onComboChange"  fieldGroupIds="formInputs"  > 
+                                    <core:ListItem key="{CodPosicion}" text="{DescPosicion}"/>
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Peso (kg)">
+                                <f:fields>
+                                    <StepInput value="{jugador>/Peso}" min="0" max="300" change="validateInputNumeros"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Altura (cm)">
+                                <f:fields>
+                                    <StepInput value="{jugador>/Altura}" min="100" max="250" change="validateInputNumeros"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Nacionalidad" >
+                                <f:fields>
+                                    <ComboBox showSecondaryValues= "true" selectedKey="{jugador>/Nacionalidad}" required="true"  items="{path : 'paises>/',length : '250'}"> 
+                                    <core:ListItem key="{paises>name}" text="{paises>name}" additionalText="{paises>code}"/>
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+			</l:content>
+		</l:Grid>
+        <buttons>
+        	<Button text="Cancelar" press="onCancelarJug" type="Reject"/>
+            <Button text="Crear" press="addPlayer" visible="{= !${vista>/editarJugador}}" type="Accept"/>   
+            <Button text="Editar" press="editPlayer" visible="{vista>/editarJugador}" type="Emphasized"/>
+		</buttons>
+    </Dialog>
+</core:FragmentDefinition>

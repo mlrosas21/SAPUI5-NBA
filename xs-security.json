@@ -1,0 +1,7 @@
+{
+  "xsappname": "academia2022znba",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of called application",
+  "scopes": [],
+  "role-templates": []
+}

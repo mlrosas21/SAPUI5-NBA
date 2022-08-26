@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="# Dorsal" key="Dorsal" />
+			<ViewSettingsItem text="Partidos Jugados" key="PartidosJugados" />
+			<ViewSettingsItem text="Puntos por partido" key="PPG" />
+            <ViewSettingsItem text="Dobles por partido" key="DPG" />
+            <ViewSettingsItem text="Triples por partido" key="TPG" />
+            <ViewSettingsItem text="Asistencias por partido" key="APG" />
+            <ViewSettingsItem text="Rebotes por partido" key="RPG" />
+            <ViewSettingsItem text="Minutos por partido" key="MPG" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

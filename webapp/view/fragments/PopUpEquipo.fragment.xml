@@ -1,0 +1,71 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+    <Dialog id="dialogEquipo" contentWidth="30%" busyIndicatorDelay="0" title="Añadir equipo" icon="sap-icon://group">
+        		<l:Grid defaultSpan="L12 M12 S12" width="auto" id="idGrid">
+			<l:content>
+            <f:Form id="idFormEquipo" editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout
+                        labelSpanXL="4"
+                        labelSpanL="3"
+                        labelSpanM="4"
+                        labelSpanS="12"
+                        emptySpanXL="0"
+                        emptySpanL="4"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="2"
+                        columnsL="1"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </f:layout>
+                <f:formContainers>
+                    <f:FormContainer title="Datos del equipo">
+                        <f:formElements>
+                            <f:FormElement label="Nombre de la franquicia">
+                                <f:fields>
+                                    <Input value="{equipo>/NombreEquipo}" required="true" enabled="{= !${vista>/editarEquipo}}" change="validateInputText" />
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Ciudad">
+                                <f:fields>
+                                    <Input value="{equipo>/Ciudad}" required="true" enabled="{= !${vista>/editarEquipo}}" change="validateInputText"/>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Estado (EE.UU.)">
+                                <f:fields>
+                                    <ComboBox showSecondaryValues= "true" selectedKey="{equipo>/Estado}" required="true" items="{/EstadoUsaSet}"  enabled="{= !${vista>/editarEquipo}}" change="onComboChange"> 
+                                    <core:ListItem key="{CodEstado}" text="{DescEstado}" additionalText = "{CodEstado}"/>
+                                    </ComboBox>
+                                </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="URL del logo del equipo">
+                                <f:fields>
+                                    <Input value="{equipo>/Logo}"  change="validateInputText"/>
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                    <f:FormContainer title="Entrenador">
+                        <f:formElements>
+                            <f:FormElement label="Nombre del entrenador">
+                                <f:fields>
+                                    <Input value="{equipo>/Entrenador}" change="validateInputText" />
+                                </f:fields>
+                            </f:FormElement>
+                        </f:formElements>
+                    </f:FormContainer>
+                </f:formContainers>
+            </f:Form>
+			</l:content>
+		</l:Grid>
+        <buttons>
+			<Button text="Cancelar" press="onCancelar" type="Reject"/>
+            <Button text="Crear" press="addTeam" visible="{= !${vista>/editarEquipo}}" type="Accept"/>   
+            <Button text="Editar" press="editTeam" visible="{vista>/editarEquipo}" type="Emphasized"/>
+		</buttons>
+    </Dialog>
+</core:FragmentDefinition>

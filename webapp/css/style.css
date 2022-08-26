@@ -1,0 +1,53 @@
+/* Enter your custom styles here */
+.grid{
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+}
+
+.nbaTiles{
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+}
+
+.sapMTileCntContent {
+    text-align: center;
+}
+
+.sapMGTHdrContent{
+    height: 2.5rem;
+    text-align: center !important;
+}
+
+.sapMGTContent{
+    height: 8rem;
+}
+
+.sapMGT.OneByOne{
+    height: auto;
+}
+
+.sapMGTHdrTxt>.sapMText{
+    text-align: center !important;
+}
+
+.teamStats{
+    font-size: 2.25rem;
+    justify-content: center;
+}
+
+.playerStats{
+    font-size: 2.25rem;
+    justify-content: center;
+}
+
+.playerSecondaryStats{
+    font-size: 2.25rem;
+}
+
+.pageStats{
+    font-size:1.75rem;
+}
+
+
